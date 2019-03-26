@@ -16,13 +16,13 @@ class TicketControl {
     siguiente() {
         this.ultimo += 1;
         this.grabarArchivo();
+        return `Ticket ${this.ultimo}`;
     }
 
     reiniciarConteo() {
         this.ultimo = 0;
         console.log('se ha inicializado el sistema');
         this.grabarArchivo();
-        return `Ticket ${this.ultimo}`;
     }
 
     grabarArchivo() {
