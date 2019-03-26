@@ -7,20 +7,31 @@ class TicketControl {
 
         let data = require('../data/data.json');
         if (data.hoy === this.hoy) {
-
+            this.ultimo = data.ultimo;
         } else {
             this.reiniciarConteo();
         }
     }
 
+    siguiente() {
+        this.ultimo += 1;
+        this.grabarArchivo();
+    }
+
     reiniciarConteo() {
+        this.ultimo = 0;
+        console.log('se ha inicializado el sistema');
+        this.grabarArchivo();
+        return `Ticket ${this.ultimo}`;
+    }
+
+    grabarArchivo() {
         let jsonData = {
             ultimo: this.ultimo,
             hoy: this.hoy
         };
         let jsonDataString = JSON.stringify(jsonData);
         fs.writeFileSync('./server/data/data.json', jsonDataString);
-        console.log('se ha inicializado el sistema');
     }
 }
 
