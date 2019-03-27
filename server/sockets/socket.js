@@ -9,4 +9,19 @@ io.on('connection', (client) => {
         console.log('siguiente ticket: ', siguiente);
         callback(siguiente);
     });
+
+    client.emit('estadoActual', {
+        actual: ticketControl.getUltimoTicket()
+    });
+
+    client.on('atenderTicket', (data, callback) => {
+        if (!data.escritorio) {
+            return callback({
+                err: true,
+                mensaje: 'el escritorio es necesario'
+            });
+        }
+        let atenderTicker = ticketControl.atenderTicket(data.escritorio);
+        callback(atenderTicker);
+    });
 });
