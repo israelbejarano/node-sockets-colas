@@ -11,6 +11,10 @@ socket.on('disconnect', function() {
     console.log('desconectado del servidor');
 });
 
+socket.on('estadoActual', function(resp) {
+    label.text(resp.actual);
+});
+
 $('button').on('click', function() {
     console.log('click!');
     socket.emit('siguienteTicket', null, function(siguienteTicket) {
