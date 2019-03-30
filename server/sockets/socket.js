@@ -24,5 +24,8 @@ io.on('connection', (client) => {
         }
         let atenderTicker = ticketControl.atenderTicket(data.escritorio);
         callback(atenderTicker);
+        client.broadcast.emit('ultimos4', {
+            ultimos4: ticketControl.getUltimos4()
+        });
     });
 });
